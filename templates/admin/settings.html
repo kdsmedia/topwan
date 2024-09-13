@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings</title>
+    <style>
+/* Reset default margins and paddings */
+body, h1, h2, form, label, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+/* Heading styles */
+h1 {
+    font-size: 2em;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #555;
+    margin: 20px 0;
+}
+
+/* Form styling */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Label and input styling */
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Select styling */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Link styling */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    h2 {
+        font-size: 1.2em;
+    }
+    
+    button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+}
+
+</style>
+</head>
+<body>
+    <h1>Admin Settings</h1>
+
+    <h2>Manage Tasks</h2>
+    <form action="/admin/add_task" method="post">
+        <label for="title">Task Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="url">Task URL/Script:</label>
+        <input type="text" id="url" name="url" required>
+
+        <label for="reward">Reward (Rp):</label>
+        <input type="number" id="reward" name="reward" required>
+
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" id="duration" name="duration" required>
+
+        <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Manage Existing Tasks</h2>
+    <form action="/admin/manage_tasks" method="post">
+        <label for="task_id">Task ID:</label>
+        <input type="number" id="task_id" name="task_id" required>
+
+        <label for="action">Action:</label>
+        <select id="action" name="action">
+            <option value="activate">Activate</option>
+            <option value="deactivate">Deactivate</option>
+            <option value="edit">Edit</option>
+        </select>
+
+        <div id="edit-details" style="display: none;">
+            <label for="new_task_title">New Title:</label>
+            <input type="text" id="new_task_title" name="new_task_title">
+
+            <label for="new_task_description">New Description:</label>
+            <textarea id="new_task_description" name="new_task_description"></textarea>
+
+            <label for="new_task_url">New URL/Script:</label>
+            <input type="text" id="new_task_url" name="new_task_url">
+
+            <label for="new_task_reward">New Reward (Rp):</label>
+            <input type="number" id="new_task_reward" name="new_task_reward">
+
+            <label for="new_task_duration">New Duration (minutes):</label>
+            <input type="number" id="new_task_duration" name="new_task_duration">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <a href="/admin/dashboard">Back to Dashboard</a>
+
+    <script>
+        document.getElementById('action').addEventListener('change', function() {
+            if (this.value === 'edit') {
+                document.getElementById('edit-details').style.display = 'block';
+            } else {
+                document.getElementById('edit-details').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
